@@ -1,7 +1,7 @@
 on:
   pull_request:
     paths:
-    - '*bedrock*'
+    - 'data/bedrock**'
   issue_comment:
     types: [created]
 
