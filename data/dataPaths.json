@@ -1205,6 +1205,7 @@
       "proto": "bedrock/1.17.0",
       "types": "bedrock/1.17.0",
       "windows": "bedrock/1.16.201",
+      "effects": "bedrock/1.16.201",
       "enchantments": "bedrock/1.16.201",
       "version": "bedrock/1.16.201"
     },
@@ -1213,6 +1214,7 @@
       "steve": "bedrock/1.16.201",
       "proto": "bedrock/1.17.0",
       "types": "bedrock/1.17.0",
+      "effects": "bedrock/1.16.201",
       "enchantments": "bedrock/1.16.201",
       "version": "bedrock/1.16.210"
     },
@@ -1221,6 +1223,7 @@
       "blockStates": "bedrock/1.16.220",
       "biomes": "bedrock/1.17.0",
       "entities": "bedrock/1.18.11",
+      "effects": "bedrock/1.16.201",
       "enchantments": "bedrock/1.16.201",
       "steve": "bedrock/1.16.201",
       "protocol": "bedrock/1.16.220",
