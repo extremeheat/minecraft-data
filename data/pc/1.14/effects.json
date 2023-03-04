@@ -295,5 +295,50 @@
     },
     "color": 12624973,
     "type": "bad"
+  },
+  {
+    "id": 28,
+    "name": "SlowFalling",
+    "displayName": "Slow Falling",
+    "protocolName": "slow_falling",
+    "modifiers": {},
+    "color": 16773073,
+    "type": "good"
+  },
+  {
+    "id": 29,
+    "name": "ConduitPower",
+    "displayName": "Conduit Power",
+    "protocolName": "conduit_power",
+    "modifiers": {},
+    "color": 1950417,
+    "type": "good"
+  },
+  {
+    "id": 30,
+    "name": "DolphinsGrace",
+    "displayName": "Dolphin's Grace",
+    "protocolName": "dolphins_grace",
+    "modifiers": {},
+    "color": 8954814,
+    "type": "good"
+  },
+  {
+    "id": 31,
+    "name": "BadOmen",
+    "displayName": "Bad Omen",
+    "protocolName": "bad_omen",
+    "modifiers": {},
+    "color": 7455580,
+    "type": "neutral"
+  },
+  {
+    "id": 32,
+    "name": "HeroOfTheVillage",
+    "displayName": "Hero of the Village",
+    "protocolName": "hero_of_the_village",
+    "modifiers": {},
+    "color": 4521796,
+    "type": "good"
   }
 ]
