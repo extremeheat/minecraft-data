@@ -1,6 +1,6 @@
 ## minecraft bedrock edition data
 
-### Obtaining data
+### Obtaining edition specific data
 
 | file name | info | how to get | schema |
 |-|-|-|-|
@@ -18,33 +18,36 @@ To update to a new protocol version:
 * Open `data/bedrock/latest` and update the `proto.yml` and `types.yml` files and update the `!version` part at the top
 * Go to `tools/js`, run `npm install` then `npm run build` to update the protodef JSON files
 
-
 then run `npm test` to test validity
 
 ### Status of data
 
 <!--StartFragment-->
-file name | have? | how to get it | notes
--- | -- | -- | --
-protocol.json | ✔ | manual updated | wip
-blocks.json | ✔ | bedrock-extractor | &nbsp;
-items.json | ✔ | bedrock-extractor | &nbsp;
-entities.json | ✔ | bedrock-extractor  | &nbsp;
-recipes.json | ✔ |  bedrock-protocol dumper | new schema: adds furnace and other special recipes. <br/> Some recipes can have multiple outputs, also allow for recipe ingredients with damage values and specific counts.
-blockCollisionShapes.json | ✔ | (from pc data) | New schema: block IDs map to an array of block state indexes, to get the block stateID, minStateId + index of array. This way different copies of the block with different state IDs can have unique collisions. 
-commands.json | ❌ | bedrock-protocol + dumper | must be custom schema, current JE schema too low level
-biomes.json | ✔ | bedrock-extractor (via Amulet) | 
-instruments | ✔ | manual | &nbsp;
-materials.json | 🔵 | (from pc data) | &nbsp;
-windows.json | ✔ | manual obtained via proxy | &nbsp;
-version.json | ✔ | from bedrock-protocol | 
-effects.json | ❌ | (from pc data) | &nbsp;
-enchantments.json | ✔ | bedrock-extractor (via Geyser -> pc data) | &nbsp;
-language.json | ❌ | (extract from game) | &nbsp;
-particles.json | 🔵 | bedrock-protocol docs | IDs not needed, handled in protocol
-blockLoot.json | 🔵 | manual data for 1.18 | &nbsp;
-entityLoot.json | 🔵 | manual data for 1.18 | &nbsp;
-mapIcons.json | 🔵 | ? | ?
+file name     | have? | how to get it | notes
+--            | -- | -- | --
+attributes    | ✔ | MANUAL | &nbsp;
+blocks        | ✔ | bedrock-extractor  | &nbsp;
+biomes        | ✔ | bedrock-extractor (via Amulet) | 
+blockCollisionShapes | ✔ | bedrock-extractor | New schema: block IDs map to an array of block state indexes, to get the block stateID, minStateId + index of array. This way different copies of the block with different state IDs can have unique collisions. 
+commands      | ❌ | bedrock-protocol + dumper | must be custom schema, current JE schema too low level
+effects       | ✔ | MANUAL | &nbsp;
+enchantments  | ✔ | bedrock-extractor (via Geyser -> pc data) | &nbsp;
+entities      | ✔ | bedrock-extractor  | &nbsp;
+instruments   | ✔ | manual | &nbsp;
+items         | ✔ | bedrock-extractor  | &nbsp;
+language      | ❌ | (extract from game) | &nbsp;
+mapIcons      | 🔵 | ? | ?
+materials     | ❌ | (from pc data) | &nbsp;
+particles     | 🔵 | bedrock-protocol docs | IDs not needed, handled in protocol
+
+protocol      | ✔ | MANUAL updated     | wip
+recipes       | ✔ |  bedrock-extractor | new schema: adds furnace and other special recipes. <br/> Some recipes can have multiple outputs, also allow for recipe ingredients with damage values and specific counts.
+version       | ✔ | from bedrock-protocol | 
+windows       | ✔ | manual obtained via proxy | &nbsp;
+
+blockLoot     | 🔵 | manual data for 1.18 | &nbsp;
+entityLoot    | 🔵 | manual data for 1.18 | &nbsp;
+
 
 <!--EndFragment-->
 
