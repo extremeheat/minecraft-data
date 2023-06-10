@@ -9,6 +9,7 @@ ByteArray: ["buffer",{"countType":"varint"}]
 SignedByteArray: ["buffer",{"countType":"zigzag32"}]
 LittleString: ["pstring",{"countType":"li32"}]
 ShortArray: ["buffer",{"countType":"li16"}]
+ShortString: ["pstring",{"countType":"li16"}]
 varint64: native                                      # Some primitives
 zigzag32: native
 zigzag64: native
@@ -2142,7 +2143,7 @@ packet_lab_table:
       0: combine
       1: react
    # Position is the position at which the lab table used was located.
-   position: vec3u
+   position: vec3i
    # ReactionType is the type of the reaction that took place as a result of the items put into the lab
    # table. The reaction type can be either that of an item or a particle, depending on whatever the result
    # was of the reaction.

@@ -9,6 +9,7 @@ ByteArray: ["buffer",{"countType":"varint"}]
 SignedByteArray: ["buffer",{"countType":"zigzag32"}]
 LittleString: ["pstring",{"countType":"li32"}]
 ShortArray: ["buffer",{"countType":"li16"}]
+ShortString: ["pstring",{"countType":"li16"}]
 varint64: native                                      # Some primitives
 zigzag32: native
 zigzag64: native
@@ -1452,6 +1453,10 @@ packet_event:
       23: target_block_hit
       24: piglin_barter
       25: waxed_or_unwaxed_copper
+      26: code_builder_runtime_action
+      27: code_builder_scoreboard
+      28: strider_ridden_in_lava_in_overworld
+      29: sneak_close_to_sculk_sensor
    use_player_id: u8
    event_data: restBuffer # Unknown data, TODO: add
 
@@ -1491,7 +1496,7 @@ packet_clientbound_map_item_data:
    # table.
    locked: bool
    # Origin is the center position of the map being updated.
-   origin: BlockCoordinates
+   origin: vec3i
    # The following fields apply only for the MapUpdateFlagInitialisation.
    # MapsIncludedIn holds an array of map IDs that the map updated is included in. This has to do with the
    # scale of the map: Each map holds its own map ID and all map IDs of maps that include this map and have
@@ -2379,7 +2384,7 @@ packet_lab_table:
       0: combine
       1: react
    # Position is the position at which the lab table used was located.
-   position: vec3u
+   position: vec3i
    # ReactionType is the type of the reaction that took place as a result of the items put into the lab
    # table. The reaction type can be either that of an item or a particle, depending on whatever the result
    # was of the reaction.

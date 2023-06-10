@@ -1,7 +1,7 @@
 # Created from MiNET and gophertunnel docs
 # The version below is the latest version this protocol schema was updated for.
 # The output protocol.json will be in the folder for the version
-!version: 1.19.62
+!version: 1.20.0
 
 # Some ProtoDef aliases
 string: ["pstring",{"countType":"varint"}]            # String / array types
@@ -9,6 +9,7 @@ ByteArray: ["buffer",{"countType":"varint"}]
 SignedByteArray: ["buffer",{"countType":"zigzag32"}]
 LittleString: ["pstring",{"countType":"li32"}]
 ShortArray: ["buffer",{"countType":"li16"}]
+ShortString: ["pstring",{"countType":"li16"}]
 varint64: native                                      # Some primitives
 zigzag32: native
 zigzag64: native
@@ -265,6 +266,10 @@ packet_start_game:
    # EditorWorld is a value to dictate if the world is in editor mode, a special mode recently introduced adding
    # "powerful tools for editing worlds, intended for experienced creators."
    editor_world: bool
+   # Whether the world was created in editor mode
+   created_in_editor: bool
+   # Whether the world was exported from editor mode
+   exported_from_editor: bool
    # The time at which the day cycle was locked if the day cycle is disabled using the respective
    # game rule. The client will maIntain this time as Boolean as the day cycle is disabled.
    day_cycle_stop_time: zigzag32
@@ -424,6 +429,11 @@ packet_start_game:
    # ClientSideGeneration is true if the client should use the features registered in the FeatureRegistry packet to
    # generate terrain client-side to save on bandwidth.
    client_side_generation: bool
+   # UseBlockNetworkIDHashes is true if the client should use the hash of a block's name as its network ID rather than
+   # its index in the expected block palette. This is useful for servers that wish to support multiple protocol versions
+   # and custom blocks, but it will result in extra bytes being written for every block in a sub chunk palette.
+   block_network_ids_are_hashes: bool
+   server_controlled_sound: bool
 
 packet_add_player:
    !id: 0x0c
@@ -787,6 +797,13 @@ packet_level_event:
       3509: cauldron_clean_banner  
       3600: block_start_break  
       3601: block_stop_break  
+      3602: block_break_speed
+      3603: particle_punch_block_down
+      3604: particle_punch_block_up
+      3605: particle_punch_block_north
+      3606: particle_punch_block_south
+      3607: particle_punch_block_west
+      3608: particle_punch_block_east
       4000: set_data
       9800: players_sleeping
       9801: sleeping_players
@@ -1463,6 +1480,11 @@ packet_event:
       23: target_block_hit
       24: piglin_barter
       25: waxed_or_unwaxed_copper
+      26: code_builder_runtime_action
+      27: code_builder_scoreboard
+      28: strider_ridden_in_lava_in_overworld
+      29: sneak_close_to_sculk_sensor
+      30: careful_restoration
    use_player_id: u8
    event_data: restBuffer # Unknown data, TODO: add
 
@@ -1502,7 +1524,7 @@ packet_clientbound_map_item_data:
    # table.
    locked: bool
    # Origin is the center position of the map being updated.
-   origin: BlockCoordinates
+   origin: vec3i
    # The following fields apply only for the MapUpdateFlagInitialisation.
    # MapsIncludedIn holds an array of map IDs that the map updated is included in. This has to do with the
    # scale of the map: Each map holds its own map ID and all map IDs of maps that include this map and have
@@ -1562,6 +1584,7 @@ packet_request_chunk_radius:
    # ChunkRadius is the requested chunk radius. This value is always the value set in the settings of the
    # player.
    chunk_radius: zigzag32
+   max_radius: u8
 
 # ChunkRadiusUpdated is sent by the server in response to a RequestChunkRadius packet. It defines the chunk
 # radius that the server allows the client to have. This may be lower than the chunk radius requested by the
@@ -1717,15 +1740,15 @@ packet_available_commands:
                10: wildcard_target
                17: file_path
                23: integer_range
-               38: equipment_slots
-               39: string
-               47: block_position
-               48: position
-               51: message
-               53: raw_text
-               57: json
-               67: block_states
-               70: command
+               43: equipment_slots
+               44: string
+               52: block_position
+               53: position
+               55: message
+               58: raw_text
+               62: json
+               71: block_states
+               74: command
             # In MC, this + prior field are combined to one 32bit bitfield
             enum_type: lu16 =>
                0x10: valid
@@ -2393,7 +2416,7 @@ packet_lab_table:
       0: combine
       1: react
    # Position is the position at which the lab table used was located.
-   position: vec3u
+   position: vec3i
    # ReactionType is the type of the reaction that took place as a result of the items put into the lab
    # table. The reaction type can be either that of an item or a particle, depending on whatever the result
    # was of the reaction.
@@ -2588,6 +2611,7 @@ packet_network_chunk_publisher_update:
    !bound: client
    # Position is the block position around which chunks loaded will remain shown to the client. Most servers
    # set this position to the position of the player itself.
+   ##TODO: Check putSignedBlockPosition
    coordinates: BlockCoordinates
    # Radius is the radius in blocks around Position that chunks sent show up in and will remain loaded in.
    # Unlike the RequestChunkRadius and ChunkRadiusUpdated packets, this radius is in blocks rather than
@@ -2838,6 +2862,12 @@ packet_emote:
    entity_id: varint64
    # EmoteID is the ID of the emote to send.
    emote_id: string
+   # XUID is the Xbox User ID of the player that sent the emote. It is only set when the emote is used by a player that
+   # is authenticated with Xbox Live.
+   xuid: string
+   # PlatformID is an identifier only set for particular platforms when using an emote (presumably only for Nintendo
+   # Switch). It is otherwise an empty string, and is used to decide which players are able to emote with each other.
+   platform_id: DeviceOS
    # Flags is a combination of flags that change the way the Emote packet operates. When the server sends
    # this packet to other players, EmoteFlagServerSide must be present.
    flags: u8 =>
@@ -3006,6 +3036,9 @@ packet_player_auth_input:
                # BlockFace is the face of the target block that was touched. If the action with the ActionType set
                # concerned a block. If not, the face is always 0.
                face: zigzag32
+   # AnalogueMoveVector is a Vec2 that specifies the direction in which the player moved, as a combination of X/Z
+   # values which are created using an analogue input.
+   analogue_move_vector: vec2f
 
 #TODO: update to use the new `shift` option in bitflags
 InputFlag: [ "bitflags", {
@@ -3048,7 +3081,8 @@ InputFlag: [ "bitflags", {
       "item_interact",
       "block_action",
       "item_stack_request",
-      "handled_teleport"
+      "handled_teleport",
+      "emoting"
    ]
 }]
 
@@ -3849,3 +3883,60 @@ packet_client_cheat_ability:
    # Layers contains all ability layers and their potential values. This should at least have one entry, being the
    # base layer.
    abilities: AbilityLayers[]u8
+
+# camera_presets gives the client a list of custom camera presets.
+packet_camera_presets:
+   !id: 0xc6
+   !bound: client
+   # Data is a compound tag of the presets being set.
+   data: nbt
+
+# unlocked_recipes gives the client a list of recipes that have been unlocked, restricting the recipes that appear in
+# the recipe book.
+packet_unlocked_recipes:
+   !id: 0xc7
+   !bound: client
+   # new_unlocks determines if new recipes have been unlocked since the packet was last sent.
+   unlock_type: lu32 =>
+   - empty
+   - initially_unlocked
+   - newly_unlocked
+   - remove_unlocked
+   - remove_all_unlocked
+   # Recipes is a list of recipe names that have been unlocked.
+   recipes: string[]varint
+
+# camera_instruction gives a custom camera specific instructions to operate.
+packet_camera_instruction:
+   !id: 0x12c
+   !bound:
+   # Data is a compound tag of the instructions to sent.
+   data: nbt
+
+packet_compressed_biome_definitions:
+   !id: 0x12d
+   !bound: client
+   # via PMMP:
+   # This packet is only sent by the server when client-side chunk generation is enabled in vanilla. It contains NBT data
+   # for biomes, similar to the BiomeDefinitionListPacket, but with a large amount of extra data for client-side chunk
+   # generation.
+   # 
+   # The data is compressed with a cursed home-brewed compression format, and it's a miracle it even works.
+   raw_payload: string
+
+packet_trim_data:
+   !id: 0x12e
+   !bound: client
+   patterns: []varint
+      item_name: string
+      pattern: string
+   materials: []varint
+      material: string
+      color: string
+      item_name: string
+
+packet_open_sign:
+   !id: 0x12f
+   !bound: client
+   position: BlockCoordinates
+   is_front: bool

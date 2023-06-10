@@ -306,7 +306,7 @@
             "array",
             {
               "countType": "li32",
-              "type": "ShortArray"
+              "type": "ShortString"
             }
           ]
         },
@@ -316,7 +316,7 @@
             "array",
             {
               "countType": "li32",
-              "type": "ShortArray"
+              "type": "ShortString"
             }
           ]
         },
@@ -373,7 +373,7 @@
             "array",
             {
               "countType": "li32",
-              "type": "ShortArray"
+              "type": "ShortString"
             }
           ]
         },
@@ -383,7 +383,7 @@
             "array",
             {
               "countType": "li32",
-              "type": "ShortArray"
+              "type": "ShortString"
             }
           ]
         }
@@ -7167,7 +7167,7 @@
         },
         {
           "name": "position",
-          "type": "vec3u"
+          "type": "vec3i"
         },
         {
           "name": "reaction_type",
@@ -8591,6 +8591,12 @@
     ],
     "ShortArray": [
       "buffer",
+      {
+        "countType": "li16"
+      }
+    ],
+    "ShortString": [
+      "pstring",
       {
         "countType": "li16"
       }
