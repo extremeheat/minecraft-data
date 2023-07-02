@@ -1,3 +1,9 @@
+## 3.39.0
+* [Update commands.yml](https://github.com/extremeheat/minecraft-data/commit/8706a8d0e0427521a9c7a2544fc345d72572d21c) (thanks @extremeheat)
+* [Update commands.yml to use GITHUB TOKEN for test](https://github.com/extremeheat/minecraft-data/commit/f3ce7ba1f18191f9d7168a11afcc2a36b4bf21a1) (thanks @extremeheat)
+* [Create commands.yml](https://github.com/extremeheat/minecraft-data/commit/7d44a3e56ed69f672767ad2f250ba466a18cf35e) (thanks @extremeheat)
+* [bedrock: Fix chunk request packet field in protocol (#725)](https://github.com/extremeheat/minecraft-data/commit/57e5888d8876a16a6011757065a1e7494ac25483) (thanks @irkmandeer)
+
 ## 3.38.0
 * pc: Add "multiSidedSigns" feature + some missing data (@PondWader)
 
