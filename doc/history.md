@@ -1,8 +1,30 @@
+## 3.40.0
+* [Bedrock 1.20.10 protocol support (#734)](https://github.com/PrismarineJS/minecraft-data/commit/fa521866fb2c50af30d072413b2a12a5a2a5eb45) (thanks @CreeperG16)
+* [Changes to 1.19.3, 1.19.4 and 1.20 protocols to fix packet_entity_sound_effect and packet_sound_effect to include optional soundEvent argument (#731)](https://github.com/PrismarineJS/minecraft-data/commit/8ab8476ae6da4a0d1f86c30bfc2120b7d417426b) (thanks @TheRedXD)
+* [Bedrock protocol changes (#730)](https://github.com/PrismarineJS/minecraft-data/commit/f00c2ccc5a0763bc04db48705772df58158cf0dd) (thanks @irkmandeer)
+* [Fixed typo in dataPaths.json for bedrock 1.19.21 (#726)](https://github.com/PrismarineJS/minecraft-data/commit/8f1ba18c79b4e1adffa4079739cb3663bdeca792) (thanks @irkmandeer)
+
+## 3.39.0
+* [Add commands workflow (#727)](https://github.com/PrismarineJS/minecraft-data/commit/ecc33128220bdb20dc813b484d5374a9bdd26d40) (thanks @extremeheat)
+* [bedrock: Fix chunk request packet field in protocol (#725)](https://github.com/PrismarineJS/minecraft-data/commit/57e5888d8876a16a6011757065a1e7494ac25483) (thanks @irkmandeer)
+
+## 3.38.0
+* pc: Add "multiSidedSigns" feature + some missing data (@PondWader)
+
+## 3.37.0
+* pc: support 1.20.0 and 1.20.1 (thanks @PondWader)
+
+## 3.36.1
+* bedrock: Fixes to protocol data (thanks @MrDiamond64)
+
+## 3.36.0
+* pc: add entity metadata (@extremeheat)
+
 ## 3.35.0
 * Add bedrock 1.20.0 protocol data
 
 ## 3.34.0
-* Partially updated protocol to 1.19.4 (thqnks @extremeheat @TFBosoN @frej4189 @bradisson)
+* Partially updated protocol to 1.19.4 (thanks @extremeheat @TFBosoN @frej4189 @bradisson)
 
 ## 3.33.0
 * Use node 18.
