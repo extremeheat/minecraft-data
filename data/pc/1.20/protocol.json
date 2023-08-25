@@ -231,7 +231,16 @@
               }
             ]
           ],
-          "42": [
+          "31": [
+            "container",
+            [
+              {
+                "name": "rotation",
+                "type": "f32"
+              }
+            ]
+          ],
+          "40": [
             "container",
             [
               {
@@ -240,16 +249,12 @@
               }
             ]
           ],
-          "43": [
+          "41": [
             "container",
             [
               {
                 "name": "positionType",
                 "type": "string"
-              },
-              {
-                "name": "origin",
-                "type": "position"
               },
               {
                 "name": "entityId",
@@ -296,7 +301,7 @@
               }
             ]
           ],
-          "95": [
+          "93": [
             "container",
             [
               {
@@ -825,9 +830,10 @@
                             "42": "minecraft:resource_or_tag_key",
                             "43": "minecraft:resource",
                             "44": "minecraft:resource_key",
-                            "45": "template_mirror",
-                            "46": "template_rotation",
-                            "47": "minecraft:uuid"
+                            "45": "minecraft:template_mirror",
+                            "46": "minecraft:template_rotation",
+                            "47": "minecraft:heightmap",
+                            "48": "minecraft:uuid"
                           }
                         }
                       ]
@@ -1132,6 +1138,7 @@
                             "minecraft:int_range": "void",
                             "minecraft:float_range": "void",
                             "minecraft:dimension": "void",
+                            "minecraft:gamemode": "void",
                             "minecraft:time": [
                               "container",
                               [
@@ -1177,8 +1184,9 @@
                                 }
                               ]
                             ],
-                            "template_mirror": "void",
-                            "template_rotation": "void",
+                            "minecraft:template_mirror": "void",
+                            "minecraft:template_rotation": "void",
+                            "minecraft:heightmap": "void",
                             "minecraft:uuid": "void"
                           }
                         }
@@ -4559,6 +4567,34 @@
               "type": "varint"
             },
             {
+              "name": "soundEvent",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "soundId",
+                  "fields": {
+                    "0": [
+                      "container",
+                      [
+                        {
+                          "name": "resource",
+                          "type": "string"
+                        },
+                        {
+                          "name": "range",
+                          "type": [
+                            "option",
+                            "f32"
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "default": "void"
+                }
+              ]
+            },
+            {
               "name": "soundCategory",
               "type": "varint"
             },
@@ -4623,6 +4659,34 @@
             {
               "name": "soundId",
               "type": "varint"
+            },
+            {
+              "name": "soundEvent",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "soundId",
+                  "fields": {
+                    "0": [
+                      "container",
+                      [
+                        {
+                          "name": "resource",
+                          "type": "string"
+                        },
+                        {
+                          "name": "range",
+                          "type": [
+                            "option",
+                            "f32"
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "default": "void"
+                }
+              ]
             },
             {
               "name": "soundCategory",
@@ -5301,17 +5365,11 @@
             },
             {
               "name": "sourceCauseId",
-              "type": [
-                "option",
-                "varint"
-              ]
+              "type": "varint"
             },
             {
               "name": "sourceDirectId",
-              "type": [
-                "option",
-                "varint"
-              ]
+              "type": "varint"
             },
             {
               "name": "sourcePosition",

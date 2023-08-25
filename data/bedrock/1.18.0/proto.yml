@@ -859,7 +859,7 @@ packet_entity_event:
       71: balloon_pop 
       72: treasure_hunt 
       73: agent_summon 
-      74: charged_crossbow 
+      74: charged_item 
       75: fall 
    data: zigzag32
 
@@ -1607,7 +1607,7 @@ packet_available_commands:
       # The list of overload parameters for this command
       overloads: []varint
          # Each of the parameters gets an array of posible overloads
-         _: []varint
+         parameters: []varint
             # The name of the parameter shown to the user (the `amount` in `/xp <amount: int>`)
             parameter_name: string
             value_type: lu16 =>
@@ -1627,9 +1627,9 @@ packet_available_commands:
             # In MC, this + prior field are combined to one 32bit bitfield
             enum_type: lu16 =>
                0x10: valid
-               0x20: enum
+               0x30: enum
                0x100: suffixed
-               0x400: soft_enum
+               0x410: soft_enum
             # Is this parameter required?
             optional: bool
             # Additinal options for this command (thanks macroshaft...)
@@ -2385,9 +2385,28 @@ packet_set_local_player_as_initialized:
    # StartGame packet.
    runtime_entity_id: varint64
 
+# UpdateSoftEnum is sent by the server to update a soft enum, also known as a dynamic enum, previously sent
+# in the AvailableCommands packet. It is sent whenever the enum should get new options or when some of its
+# options should be removed.
+# The UpdateSoftEnum packet will apply for enums that have been set in the AvailableCommands packet with the
+# 'Dynamic' field of the CommandEnum set to true.
 packet_update_soft_enum:
    !id: 0x72
    !bound: client
+   # EnumType is the type of the enum. This type must be identical to the one set in the AvailableCommands
+   # packet, because the client uses this to recognise which enum to update.
+   enum_type: string
+   # Options is a list of options that should be updated. Depending on the ActionType field, either these
+   # options will be added to the enum, the enum options will be set to these options or all of these
+   # options will be removed from the enum.
+   options: string[]varint
+   # ActionType is the type of the action to execute on the enum. The Options field has a different result,
+   # depending on what ActionType is used.
+   action_type: u8 =>
+      0: add
+      1: remove
+      2: update
+
 
 # NetworkStackLatency is sent by the server (and the client, on development builds) to measure the latency
 # over the entire Minecraft stack, rather than the RakNet latency. It has other usages too, such as the
@@ -2699,9 +2718,10 @@ packet_education_settings:
    HasQuiz: bool
    has_external_link_settings: bool
    external_link_settings: has_external_link_settings ?
-      has: bool
-      url: string
-      display_name: string
+      if true:
+         has: bool
+         url: string
+         display_name: string
 
 # Emote is sent by both the server and the client. When the client sends an emote, it sends this packet to
 # the server, after which the server will broadcast the packet to other players online.
@@ -2858,7 +2878,7 @@ packet_player_auth_input:
             if start_break or abort_break or crack_break or predict_break or continue_break:
                # BlockPosition is the position of the target block, if the action with the ActionType set concerned a
                # block. If that is not the case, the block position will be zero.
-               position: BlockCoordinates
+               position: vec3i
                # BlockFace is the face of the target block that was touched. If the action with the ActionType set
                # concerned a block. If not, the face is always 0.
                face: zigzag32
