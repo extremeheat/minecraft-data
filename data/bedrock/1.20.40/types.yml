@@ -1199,7 +1199,7 @@ MapDecoration:
    - village_snowy
    - village_taiga
    - jungle_temple
-   - witch_hut =>
+   - witch_hut
    - marker_white
    - marker_green
    - marker_red
