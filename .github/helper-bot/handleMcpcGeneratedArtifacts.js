@@ -16,12 +16,14 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   const dataPaths = require('../../data/dataPaths.json')
   const dataPath = dataPaths.pc[version]
 
+  exec('ls')
+
   const branch = ourPR.headBranch
   exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
   exec('git', ['fetch', 'fo', branch])
-  exec('git', ['checkout', branch])
+  exec('git', ['checkout', '-b', branch, `fo/` + branch])
   // exec('git', ['log'])
-  exec('ls', ['-R', 'data'])
+  exec('ls')
   exec('ls', ['-R', root])
 
   const destDir = join(root, `./data/pc/${version}`)
