@@ -17,8 +17,6 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
   exec('git', ['fetch', 'fo', branch])
   exec('git', ['checkout', '-b', branch, `fo/` + branch])
-  exec('ls')
-  exec('ls', [join(root, `./data/pc/`)])
 
   const dataPaths = require('../../data/dataPaths.json')
   const dataPath = dataPaths.pc[version]
@@ -29,6 +27,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
     process.exit(1)
   }
 
+  if (ourPR.body)
   await github.updateIssue(ourPR.number, {
     body: ourPR.body.replace('<!--minecraft-data-generator-placeholder-->', `- https://github.com/PrismarineJS/minecraft-data-generator/pull/${genPullNo}`)
   })
@@ -40,7 +39,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   // https://github.com/PrismarineJS/minecraft-data-generator/actions/runs/17261281146/artifacts/3861320839
   const s = artifactURL.split('github.com/')[1]
   const [ownerName, repoName, _actions, _runs, _runId, _artifacts, artifactId] = s
-  await github.downloadArtifactIdFrom(ownerName, repoName, artifactId, artifactsDir)
+  await github.downloadIdFrom(ownerName, repoName, artifactId, artifactsDir)
 
   console.log(fs.readdirSync(artifactsDir, { recursive: true }))
 
