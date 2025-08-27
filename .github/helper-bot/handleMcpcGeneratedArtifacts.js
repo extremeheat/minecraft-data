@@ -3,7 +3,7 @@ const cp = require('child_process')
 const github = require('gh-helpers')()
 const { join } = require('path')
 
-function exec (file, args, options = {}) {
+function exec (file, args = [], options = {}) {
   const opts = { stdio: 'inherit', ...options }
   console.log('> ', file, args.join(' '), options.cwd ? `(cwd: ${options.cwd})` : '')
   return github.mock ? undefined : cp.execFileSync(file, args, opts)
