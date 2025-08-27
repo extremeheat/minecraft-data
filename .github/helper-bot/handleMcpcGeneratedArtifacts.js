@@ -20,8 +20,9 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
   exec('git', ['fetch', 'fo', branch])
   exec('git', ['checkout', branch])
-  exec('git', ['log'])
-  exec('ls', ['-R'])
+  // exec('git', ['log'])
+  exec('ls', ['-R', 'data'])
+  exec('ls', ['-R', root])
 
   const destDir = join(root, `./data/pc/${version}`)
   if (!fs.existsSync(destDir) || !dataPath) {
