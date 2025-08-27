@@ -18,7 +18,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
 
   const branch = ourPR.headBranch
   exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
-  exec('git', ['pull', 'fo', branch])
+  exec('git', ['fetch', 'fo', branch])
   exec('git', ['checkout', branch])
 
   const destDir = join(root, `./data/pc/${version}`)
