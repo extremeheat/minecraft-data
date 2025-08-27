@@ -41,7 +41,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   const [ownerName, repoName, _actions, _runs, _runId, _artifacts, artifactId] = s
   await github.downloadIdFrom(ownerName, repoName, artifactId, artifactsDir)
 
-  console.log(fs.readdirSync(artifactsDir, { recursive: true }))
+  console.log(fs.readdirSync(artifactsDir))
 
   // Now copy artifacts/${version}/*.json to data/pc/$version/*.json
   const versionArtifactsDir = join(artifactsDir, version)
