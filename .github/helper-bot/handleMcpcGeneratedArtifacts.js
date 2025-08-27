@@ -24,7 +24,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   exec('git', ['checkout', '-b', branch, `fo/` + branch])
   // exec('git', ['log'])
   exec('ls')
-  exec('ls', ['-R', root])
+  exec('ls', [join(root, `./data/pc/`)])
 
   const destDir = join(root, `./data/pc/${version}`)
   if (!fs.existsSync(destDir) || !dataPath) {
