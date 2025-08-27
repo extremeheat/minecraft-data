@@ -13,18 +13,15 @@ const artifactsDir = join(__dirname, './artifacts')
 const root = join(__dirname, '..', '..')
 
 async function handle (ourPR, genPullNo, version, artifactURL) {
-  const dataPaths = require('../../data/dataPaths.json')
-  const dataPath = dataPaths.pc[version]
-
-  exec('ls')
-
   const branch = ourPR.headBranch
   exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
   exec('git', ['fetch', 'fo', branch])
   exec('git', ['checkout', '-b', branch, `fo/` + branch])
-  // exec('git', ['log'])
   exec('ls')
   exec('ls', [join(root, `./data/pc/`)])
+
+  const dataPaths = require('../../data/dataPaths.json')
+  const dataPath = dataPaths.pc[version]
 
   const destDir = join(root, `./data/pc/${version}`)
   if (!fs.existsSync(destDir) || !dataPath) {
