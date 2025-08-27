@@ -28,7 +28,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
 
   const destDir = join(root, `./data/pc/${version}`)
   if (!fs.existsSync(destDir) || !dataPath) {
-    console.warn(`⚠️ Version ${version} not found (checked ${destDir}) ; cannot continue.`)
+    console.warn(`⚠️ Version ${version} not found (checked ${destDir}) ; cannot continue.`, fs.existsSync(destDir), dataPath)
     process.exit(1)
   }
 
