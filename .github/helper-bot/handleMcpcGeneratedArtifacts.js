@@ -13,10 +13,20 @@ const artifactsDir = join(__dirname, './artifacts')
 const root = join(__dirname, '..', '..')
 
 async function handle (ourPR, genPullNo, version, artifactURL) {
-  const branch = ourPR.headBranch
-  exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
-  exec('git', ['fetch', 'fo', branch])
-  exec('git', ['checkout', '-b', branch, `fo/` + branch])
+  // if foreign PR:
+  // const branch = ourPR.headBranch
+  // exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
+  // exec('git', ['fetch', 'fo', branch])
+  // exec('git', ['checkout', '-b', branch, `fo/` + branch])
+
+  const branchNameVersion = version.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
+  const branch = `pc-${branchNameVersion}`
+  try {
+    exec('git', ['switch', branch])
+  } catch (err) {
+    console.error('Error checking out branch:', err)
+    process.exit(1)
+  }
 
   const dataPaths = require('../../data/dataPaths.json')
   const dataPath = dataPaths.pc[version]
@@ -65,7 +75,7 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
   exec('git', ['config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'])
   exec('git', ['add', '--all'])
   exec('git', ['commit', '-m', `[Auto] Apply generated data from PrismarineJS/minecraft-data-generator#${genPullNo}`])
-  exec('git', ['push', 'fo', branch])
+  exec('git', ['push', 'origin', branch])
 }
 
 async function main (versions, genPullNo, artifactUrl) {
