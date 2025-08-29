@@ -13,7 +13,7 @@ const artifactsDir = join(__dirname, './artifacts')
 const root = join(__dirname, '..', '..')
 
 async function handle (ourPR, genPullNo, version, artifactURL) {
-  // if foreign PR:
+  // if external PR:
   // const branch = ourPR.headBranch
   // exec('git', ['remote', 'add', 'fo', ourPR.headCloneURL])
   // exec('git', ['fetch', 'fo', branch])
@@ -37,10 +37,11 @@ async function handle (ourPR, genPullNo, version, artifactURL) {
     process.exit(1)
   }
 
-  if (ourPR.body)
-  await github.updateIssue(ourPR.number, {
-    body: ourPR.body.replace('<!--minecraft-data-generator-placeholder-->', `- https://github.com/PrismarineJS/minecraft-data-generator/pull/${genPullNo}`)
-  })
+  if (ourPR.body) { 
+    await github.updateIssue(ourPR.number, {
+      body: ourPR.body.replace('<!--minecraft-data-generator-placeholder-->', `- https://github.com/PrismarineJS/minecraft-data-generator/pull/${genPullNo}`)
+    })
+  }
 
   console.log('Handling PR:', ourPR)
 
@@ -87,7 +88,6 @@ async function main (versions, genPullNo, artifactUrl) {
     console.log('PR', details)
     await handle(details, genPullNo, version, artifactUrl)
   } else {
-    console.log('No PR found with "🎈" prefix')
     process.exit(1)
   }
 }
