@@ -3,7 +3,7 @@
     "fix": "standard --fix"
   },
   "dependencies": {
-    "gh-helpers": "^0.3.5"
+    "gh-helpers": "extremeheat/gh-helpers"
   },
   "devDependencies": {
     "standard": "^17.1.2"
