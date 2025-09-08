@@ -3,7 +3,7 @@ const github = require('gh-helpers')()
 const path = require('path')
 
 function exec (file, args = [], options = {}) {
-  const opts = { stdio: 'inherit', ...options }
+  const opts = { stdio: ['inherit', 'inherit', 'inherit'], ...options }
   console.log('> ', file, args.join(' '), options.cwd ? `(cwd: ${options.cwd})` : '')
   // return github.mock ? undefined : cp.execFileSync(file, args, opts)
   return github.mock ? undefined : Bun.spawnSync([file, ...args], opts)
