@@ -31,11 +31,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - name: Expose GitHub Runtime
-        uses: crazy-max/ghaction-github-runtime@v3
-      - run: cd .github/helper-bot && npm install
-      - run: cd tools/js && npm install
-      - run: cd .github/helper-bot && node handleMcpcGeneratedArtifacts.js
+      # - name: Expose GitHub Runtime
+      #   uses: crazy-max/ghaction-github-runtime@v3
+      - run: cd .github/helper-bot && bun install
+      - run: cd tools/js && bun install
+      - run: cd .github/helper-bot && bun handleMcpcGeneratedArtifacts.js
         env:
           TRIGGER_MC_VERSIONS: ${{ github.event.inputs.versions }}
           TRIGGER_PR_NO: ${{ github.event.inputs.prNumber }}

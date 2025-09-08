@@ -15,8 +15,8 @@ let node = 'node'
 try {
   exec('npm', ['--version']).toString().trim()
 } catch (e) {
-  npm = '/home/runner/.bun/bin/bun'
-  node = '/home/runner/.bun/bin/bun'
+  npm = process.execPath
+  node = process.execPath
 }
 
 const sanitizeBranch = (branchName) => branchName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
