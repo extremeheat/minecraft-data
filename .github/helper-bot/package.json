@@ -3,7 +3,6 @@
     "fix": "standard --fix"
   },
   "dependencies": {
-    "bun": "^1.2.21",
     "gh-helpers": "^1.0.0"
   },
   "devDependencies": {
