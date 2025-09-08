@@ -1,5 +1,6 @@
 const cp = require('child_process')
 const github = require('gh-helpers')()
+const path = require('path')
 
 function exec (file, args = [], options = {}) {
   const opts = { stdio: 'inherit', ...options }
@@ -8,6 +9,7 @@ function exec (file, args = [], options = {}) {
 }
 
 // Sometimes node/npm not in path...?
+exec('ls', ['-la', path.dirname(process.execPath)])
 let npm = 'npm'
 let node = 'node'
 try {
