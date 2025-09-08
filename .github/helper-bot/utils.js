@@ -9,23 +9,13 @@ function exec (file, args = [], options = {}) {
   return github.mock ? undefined : Bun.spawnSync([file, ...args], opts)
 }
 
-// Sometimes node/npm not in path...?
-exec('ls', ['-la', path.dirname(process.execPath)])
-let npm = 'npm'
-let node = 'node'
-try {
-  exec('npm', ['--version']).toString().trim()
-} catch (e) {
-  npm = process.execPath
-  node = process.execPath
-}
-
+const toolsJs = path.join(__dirname, '..', '..', 'tools', 'js')
 const sanitizeBranch = (branchName) => branchName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
 
 async function createInitialPR (edition, issueUrl, { version, protocolVersion }) {
-  exec(process.execPath, ['install'], { cwd: 'tools/js' })
-  exec(process.execPath, ['run', 'version', edition, version, protocolVersion], { cwd: 'tools/js' })
-  exec(process.execPath, ['run', 'build'], { cwd: 'tools/js' })
+  exec(process.execPath, ['install'], { cwd: toolsJs })
+  exec(process.execPath, ['run', 'version', edition, version, protocolVersion], { cwd: toolsJs })
+  exec(process.execPath, ['run', 'build'], { cwd: toolsJs })
   const branchNameVersion = sanitizeBranch(version)
   const branchName = `${edition}-${branchNameVersion}`
   const title = `🎈 Add Minecraft ${edition} ${version} data`

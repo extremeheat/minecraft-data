@@ -31,11 +31,9 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      # - name: Expose GitHub Runtime
-      #   uses: crazy-max/ghaction-github-runtime@v3
       - run: cd .github/helper-bot && bun install
       - run: cd tools/js && bun install
-      - run: bun add bun && chmod +x node_modules/bun/bin/bun.exe && node_modules/bun/bin/bun.exe handleMcpcGeneratedArtifacts.js
+      - run: bun handleMcpcGeneratedArtifacts.js
         working-directory: .github/helper-bot
         env:
           TRIGGER_MC_VERSIONS: ${{ github.event.inputs.versions }}
