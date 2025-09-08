@@ -2879,9 +2879,7 @@
         "num_values": 2
       }
     ],
-    "drops": [
-      55
-    ],
+    "drops": [],
     "boundingBox": "block"
   },
   {
@@ -11231,7 +11229,7 @@
       }
     ],
     "drops": [
-      1063
+      0
     ],
     "boundingBox": "empty"
   },
@@ -22637,7 +22635,7 @@
       }
     ],
     "drops": [
-      0
+      1231
     ],
     "boundingBox": "block"
   },
@@ -30869,7 +30867,9 @@
         ]
       }
     ],
-    "drops": [],
+    "drops": [
+      255
+    ],
     "boundingBox": "empty"
   },
   {
@@ -30888,7 +30888,9 @@
     "minStateId": 19719,
     "maxStateId": 19719,
     "states": [],
-    "drops": [],
+    "drops": [
+      255
+    ],
     "boundingBox": "empty"
   },
   {
