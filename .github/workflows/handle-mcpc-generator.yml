@@ -28,6 +28,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 22.x
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v3
       - run: cd .github/helper-bot && npm install
