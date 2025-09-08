@@ -5,7 +5,8 @@ const path = require('path')
 function exec (file, args = [], options = {}) {
   const opts = { stdio: 'inherit', ...options }
   console.log('> ', file, args.join(' '), options.cwd ? `(cwd: ${options.cwd})` : '')
-  return github.mock ? undefined : cp.execFileSync(file, args, opts)
+  // return github.mock ? undefined : cp.execFileSync(file, args, opts)
+  return github.mock ? undefined : Bun.spawnSync([file, ...args], opts)
 }
 
 // Sometimes node/npm not in path...?
@@ -22,9 +23,9 @@ try {
 const sanitizeBranch = (branchName) => branchName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
 
 async function createInitialPR (edition, issueUrl, { version, protocolVersion }) {
-  exec(npm, ['install'], { cwd: 'tools/js' })
-  exec(npm, ['run', 'version', edition, version, protocolVersion], { cwd: 'tools/js' })
-  exec(npm, ['run', 'build'], { cwd: 'tools/js' })
+  exec('npm', ['install'], { cwd: 'tools/js' })
+  exec('npm', ['run', 'version', edition, version, protocolVersion], { cwd: 'tools/js' })
+  exec('npm', ['run', 'build'], { cwd: 'tools/js' })
   const branchNameVersion = sanitizeBranch(version)
   const branchName = `${edition}-${branchNameVersion}`
   const title = `🎈 Add Minecraft ${edition} ${version} data`
