@@ -23,9 +23,9 @@ try {
 const sanitizeBranch = (branchName) => branchName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase()
 
 async function createInitialPR (edition, issueUrl, { version, protocolVersion }) {
-  exec('npm', ['install'], { cwd: 'tools/js' })
-  exec('npm', ['run', 'version', edition, version, protocolVersion], { cwd: 'tools/js' })
-  exec('npm', ['run', 'build'], { cwd: 'tools/js' })
+  exec(process.execPath, ['install'], { cwd: 'tools/js' })
+  exec(process.execPath, ['run', 'version', edition, version, protocolVersion], { cwd: 'tools/js' })
+  exec(process.execPath, ['run', 'build'], { cwd: 'tools/js' })
   const branchNameVersion = sanitizeBranch(version)
   const branchName = `${edition}-${branchNameVersion}`
   const title = `🎈 Add Minecraft ${edition} ${version} data`

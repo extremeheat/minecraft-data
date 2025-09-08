@@ -35,6 +35,7 @@ jobs:
       #   uses: crazy-max/ghaction-github-runtime@v3
       - run: cd .github/helper-bot && bun install
       - run: cd tools/js && bun install
+      - run: which bun
       - run: bun handleMcpcGeneratedArtifacts.js
         working-directory: .github/helper-bot
         env:
