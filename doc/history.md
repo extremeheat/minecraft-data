@@ -1,3 +1,9 @@
+## 3.105.1
+* [pc/protocol: Backport velocity naming changes (#1153)](https://github.com/PrismarineJS/minecraft-data/commit/7e72793ce9aa8235a0f9f9df755c2ee21b825af5) (thanks @SuperGamerTron)
+* [fix(bedrock/proto): mismatched field type in TransactionActions (#1157)](https://github.com/PrismarineJS/minecraft-data/commit/ffa565f17bbf1d5420c860cb29d72aa6e3af7153) (thanks @hax0r31337)
+* Updates to protocolVersions.json
+
+
 ## 3.105.0
 * [🎈 Add Minecraft pc 1.21.11 data (#1144)](https://github.com/PrismarineJS/minecraft-data/commit/52cfa3ed1534226868dd6f1a6c47f16070e939ad) (thanks @rom1504bot)
 
