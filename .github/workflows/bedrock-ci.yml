@@ -55,5 +55,5 @@ jobs:
     - name: Running bedrock-protocol tests
       run: |
         curl -o node_modules/protodef/src/serializer.js https://raw.githubusercontent.com/extremeheat/node-protodef/refs/heads/dlog/src/serializer.js && curl -o node_modules/protodef/src/compiler.js https://raw.githubusercontent.com/extremeheat/node-protodef/refs/heads/dlog/src/compiler.js
-        npm test
+        DEBUG=minecraft-protocol npm test
       working-directory: bedrock-protocol
