@@ -1,5 +1,13 @@
 [
   {
+    "minecraftVersion": "26.2-snapshot-2",
+    "version": 1073742132,
+    "dataVersion": 4884,
+    "usesNetty": true,
+    "majorVersion": "26.2-snapshot-2",
+    "releaseType": "snapshot"
+  },
+  {
     "minecraftVersion": "26.1.2",
     "version": 775,
     "dataVersion": 4790,
