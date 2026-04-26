@@ -1,3 +1,7 @@
+## 3.109.1
+* [pc: Fix attribute_modifiers structure in protocol.json for 1.21.5-1.21.11 (#1155)](https://github.com/PrismarineJS/minecraft-data/commit/82a071ee6e80cd3c86f87c808e366c60a5b58f59) (thanks @reallyoldfogie)
+* [pc: SlotComponentType fixes for 1.21.5-1.21.11 (#1173)](https://github.com/PrismarineJS/minecraft-data/commit/fefacc72872f9c21273f0d2a9663cd34221efb6f) (thanks @reallyoldfogie)
+
 ## 3.109.0
 * [Fix recipe metadata for planks from logs in pre-1.13 versions (#1166)](https://github.com/PrismarineJS/minecraft-data/commit/f9b2eaeade48f5fe71e3b2bb28e929106064302c) (thanks @rom1504)
 
