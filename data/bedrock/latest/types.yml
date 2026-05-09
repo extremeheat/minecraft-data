@@ -801,6 +801,10 @@ Recipes: []varint
    type: zigzag32 =>
       0: shapeless #'ENTRY_SHAPELESS',
       1: shaped #'ENTRY_SHAPED',
+      2: furnace # 'ENTRY_FURNACE', # removed 1.26.20
+      # `furnace_with_metadata` is a recipe specifically used for furnace-type crafting stations. It is equal to
+      # `furnace`, except it has an input item with a specific metadata value, instead of any metadata value.
+      3: furnace_with_metadata # 'ENTRY_FURNACE_DATA', # removed 1.26.20
       4: multi #'ENTRY_MULTI', //TODO
       5: shulker_box #'ENTRY_SHULKER_BOX', //TODO
       6: shapeless_chemistry #'ENTRY_SHAPELESS_CHEMISTRY', //TODO
@@ -833,6 +837,15 @@ Recipes: []varint
          assume_symmetry: bool
          unlocking_requirement: RecipeUnlockingRequirement
          network_id: varint
+      if furnace: # removed 1.26.20
+         input_id: zigzag32
+         output: ItemLegacy
+         block: string
+      if furnace_with_metadata: # removed 1.26.20
+         input_id: zigzag32
+         input_meta: zigzag32
+         output: ItemLegacy
+         block: string
       if multi:
          uuid: uuid
          network_id: varint

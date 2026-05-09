@@ -1893,6 +1893,8 @@
                   "mappings": {
                     "0": "shapeless",
                     "1": "shaped",
+                    "2": "furnace",
+                    "3": "furnace_with_metadata",
                     "4": "multi",
                     "5": "shulker_box",
                     "6": "shapeless_chemistry",
@@ -2188,6 +2190,44 @@
                         {
                           "name": "network_id",
                           "type": "varint"
+                        }
+                      ]
+                    ],
+                    "furnace": [
+                      "container",
+                      [
+                        {
+                          "name": "input_id",
+                          "type": "zigzag32"
+                        },
+                        {
+                          "name": "output",
+                          "type": "ItemLegacy"
+                        },
+                        {
+                          "name": "block",
+                          "type": "string"
+                        }
+                      ]
+                    ],
+                    "furnace_with_metadata": [
+                      "container",
+                      [
+                        {
+                          "name": "input_id",
+                          "type": "zigzag32"
+                        },
+                        {
+                          "name": "input_meta",
+                          "type": "zigzag32"
+                        },
+                        {
+                          "name": "output",
+                          "type": "ItemLegacy"
+                        },
+                        {
+                          "name": "block",
+                          "type": "string"
                         }
                       ]
                     ],
