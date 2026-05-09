@@ -12345,6 +12345,13 @@
         {
           "name": "entity_unique_id",
           "type": "li64"
+        },
+        {
+          "name": "fire_at_position",
+          "type": [
+            "option",
+            "vec3f"
+          ]
         }
       ]
     ],
@@ -12358,13 +12365,6 @@
         {
           "name": "nbt",
           "type": "nbtLoop"
-        },
-        {
-          "name": "fire_at_position",
-          "type": [
-            "option",
-            "vec3f"
-          ]
         }
       ]
     ],
